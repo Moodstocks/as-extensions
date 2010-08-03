@@ -35,5 +35,6 @@ module ActiveSupport module Extension
   
   # Now we can load everything normally
   ASE::need %w{ rubygems active_support fileutils }
+  ASE::require_part %w{ fs }
 
 end end
