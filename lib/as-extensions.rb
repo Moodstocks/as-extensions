@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'active_support'
-
 module ActiveSupport module Extension
   
   ASE = self
@@ -17,9 +14,26 @@ module ActiveSupport module Extension
         require File.join(dir, part)
       end
     end
+    
+    # Require an extension / extensions of a library
+    def require_ext(ext, dir=nil)
+      orig = caller(1).first.split(':').first
+      dir ||= File.join( File.dirname(File.dirname(orig)), 'ext' )
+      if ext.is_a? Array
+        ext.each do |e| require_ext(e, dir) end
+      else
+        require File.join(dir, ext)
+      end
+    end
 
   end # class << self
 
-  ASE::require_part %w{ log need }
+  # This loading order (need, logger, log) is necessary to bootstrap need()
+  ASE::require_part 'need'
+  ASE::need 'logger'
+  ASE::require_part 'log'
+  
+  # Now we can load everything normally
+  ASE::need %w{ rubygems active_support fileutils }
 
 end end
