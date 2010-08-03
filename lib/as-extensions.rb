@@ -35,7 +35,7 @@ module ActiveSupport module Extension
   
   # Now we can load everything normally
   ASE::need %w{ rubygems active_support fileutils uri }
-  ASE::require_part %w{ fs enum ext-logic }
-  ASE::require_ext %w{ dir hash io object string symbol }
+  ASE::require_part %w{ fs enum deep ext-logic }
+  ASE::require_ext %w{ array dir hash io object string symbol }
 
 end end

@@ -1,13 +1,5 @@
-Hash.class_eval do
-  
-  # Cast keys to symbols.
-  def to_sym
-    inject({}) do |h, (k,v)|
-      h[k.to_sym] = v
-      h
-    end
-  end
-  
+Array.class_eval do
+
   # Call ASE::deepcompact(self)
   def deepcompact
     require 'as-extensions'
