@@ -24,4 +24,12 @@ String.class_eval do
     underscore.dasherize_noase
   end
   
+  # Helper to convert a raw string to a sane identifier with dashes and ASCII letters.
+  # Interpolation is here to force String type, to_s won't always work.
+  String.class_eval do
+    def sanitize_dashes
+      "#{ActiveSupport::Extension::SlugString.new(self).approximate_ascii.to_ascii.normalize.to_s}"
+    end
+  end
+  
 end
