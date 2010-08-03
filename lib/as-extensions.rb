@@ -34,8 +34,8 @@ module ActiveSupport module Extension
   ASE::require_part 'log'
   
   # Now we can load everything normally
-  ASE::need %w{ rubygems active_support fileutils }
-  ASE::require_part %w{ fs }
-  ASE::require_ext %w{ object }
+  ASE::need %w{ rubygems active_support fileutils uri }
+  ASE::require_part %w{ fs ext-logic }
+  ASE::require_ext %w{ dir hash io object string symbol }
 
 end end
