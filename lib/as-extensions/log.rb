@@ -8,9 +8,11 @@ module ActiveSupport module Extension
   
     # Print to the logs. Exit if logging a fatal error.
     # Level can be one of: :debug, :info, :warn, :error, :fatal.
+    # Returns nil.
     def log(s, level=(:warn))
       LOGGER.send(level, s)
       exit! if level == :fatal
+      nil
     end
   
     # Run a block with logging disabled
