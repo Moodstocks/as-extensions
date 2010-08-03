@@ -10,7 +10,7 @@ begin
     gemspec.homepage = "http://moodstocks.com"
     gemspec.description = "This gem expends Rails' ActiveSupport"
     gemspec.authors = ["Pierre Chapuis"]
-    gemspec.files = FileList['lib/**/*.rb']
+    gemspec.files = FileList['lib/**/*.rb', 'ext/*.rb']
     gemspec.add_dependency 'activesupport'
   end
 rescue LoadError
