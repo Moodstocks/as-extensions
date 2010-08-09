@@ -7,6 +7,12 @@ String.class_eval do
       ActiveSupport::Extension::String::from(file_or_url)
     end
     
+    # Return an alphanumeric string.
+    def rand_alphanum(n=1)
+      @as_alphanum ||= [('a'..'z'), ('A'..'Z'), ('0'..'9')].map{ |x| x.to_a }.flatten
+      Array.new(n){ @as_alphanum.pick }.join
+    end
+    
   end # class << self
   
   alias :camelcase_noase :camelcase

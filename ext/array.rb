@@ -5,6 +5,7 @@ Array.class_eval do
     ActiveSupport::Extension::deepcompact(self)
   end
   
+  # Return a random element.
   def pick
     self[Kernel.rand(size)]
   end
