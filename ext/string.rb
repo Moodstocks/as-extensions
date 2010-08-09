@@ -4,7 +4,6 @@ String.class_eval do
     
     # Load a string from a file or a URL.
     def from(file_or_url)
-      require 'as-extensions'
       ActiveSupport::Extension::String::from(file_or_url)
     end
     
