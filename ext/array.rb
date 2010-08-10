@@ -10,4 +10,10 @@ Array.class_eval do
     self[Kernel.rand(size)]
   end
   
+  # Boolean map: same as map but returns a boolean intersection of the resulting values.
+  # Hence, the return type of this is a boolean.
+  def bmap(&blk)
+    map(&blk).inject{ |s,x| s && x }
+  end
+  
 end
