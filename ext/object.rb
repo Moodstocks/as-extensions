@@ -11,4 +11,9 @@ Object.class_eval do
     is_a?(TrueClass) || is_a?(FalseClass)
   end
   
+  # Force boolean type
+  def to_b
+    self ? true : false
+  end
+  
 end
