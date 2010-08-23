@@ -53,7 +53,7 @@ module ActiveSupport module Extension
   ASE::require_part 'log'
   
   # Now we can load everything normally
-  ASE::need %w{ rubygems active_support fileutils uri }
+  ASE::need %w{ active_support fileutils uri }
   ASE::require_part %w{ fs enum deep slugstring test time ext-logic }
   ASE::require_ext %w{ array datetime dir hash io object string symbol time }
 
