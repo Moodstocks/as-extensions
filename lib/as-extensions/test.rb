@@ -75,13 +75,11 @@ module ActiveSupport module Extension module Test
     end
   
     def assert_true(b=nil, msg=nil)
-      assert_boolean b, msg
-      assert b, msg
+      assert b == true, msg
     end
     
     def assert_false(b=nil, msg=nil)
-      assert_boolean b, msg
-      assert !b, msg
+      assert b == false, msg
     end
     
     def assert_nil(x=1, msg=nil)
