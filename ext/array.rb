@@ -19,7 +19,7 @@
 
 Array.class_eval do
 
-  alias :first :head
+  alias :head :first
   
   def tail
     self[1..-1]
