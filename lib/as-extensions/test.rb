@@ -122,6 +122,7 @@ module ActiveSupport module Extension module Test
         exit!(47) if Test::CONFIG[:nb_nok] > 0 # propagate failure
       end
       child_pid = Process.wait
+      msg = msg.is_a?(::String) ? "Failure in isolation jail \"#{msg}\"" : nil
       assert_equal 0, $?.exitstatus, msg_stack(msg, "Process in isolation returned #{$?.exitstatus}")
     end
   
