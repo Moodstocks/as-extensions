@@ -33,7 +33,8 @@ module ActiveSupport module Extension module String
           open(where) do |f| return IO::to_string(f, is_gz) end
         else
           ASE::need 'open-uri'
-          uri.open do |f| return IO::to_string(f, is_gz) end
+          args = uri.userinfo ? { :http_basic_authentication => uri.userinfo.split(':') } : {}
+          uri.open(args) do |f| return io_to_string(f, is_gz) end
       end # case
     end
     
