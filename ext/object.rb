@@ -27,7 +27,7 @@ Object.class_eval do
   
   # Return true if the object is a boolean, false otherwise.
   def boolean?
-    is_a?(TrueClass) || is_a?(FalseClass)
+    is_a?(::TrueClass) || is_a?(::FalseClass)
   end
   
   # Force boolean type

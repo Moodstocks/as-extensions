@@ -27,7 +27,7 @@ module ActiveSupport module Extension
     # Require a gem / gems on the fly.
     # Returns true if the gem was successfuly loaded, nil otherwise.
     def need(ext)
-      if ext.is_a?(Array)
+      if ext.is_a?(::Array)
         ext.each do |e| need(e) end
       else
         return true if NEEDED[ext]
