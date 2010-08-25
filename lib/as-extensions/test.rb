@@ -61,7 +61,7 @@ module ActiveSupport module Extension module Test
         debug "=== TEST NOT OK ==="
         debug caller.join("\n")
         puts "ERROR ==> #{msg}" if msg
-        raise $! if CONFIG[:fatal]
+        exit! if CONFIG[:fatal]
         return false
       end
     end
