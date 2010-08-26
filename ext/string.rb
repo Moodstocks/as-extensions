@@ -56,4 +56,10 @@ String.class_eval do
     end
   end
   
+  # Sometimes calling puts as a method can be useful
+  def puts
+    puts self
+  end
+  alias :p :puts
+  
 end
