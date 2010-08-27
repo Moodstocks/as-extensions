@@ -32,4 +32,20 @@ Hash.class_eval do
     ActiveSupport::Extension::deepcompact(self)
   end
   
+  # Transforms a hash-based tree into an array of arrays
+  # Example input: {'a'=>'aa', 'b' => {'ba' => 'baa', 'bb' => 'bba'}}
+  # Example output: 
+  def denormalize(trace=[])
+    r = []
+    self.each_pair do |k,v|
+      if v.is_a?(Hash)
+        l = v.denormalize(trace + [k])
+        l.map_mr(:push, r) unless (r.respond_to?(:empty?) && r.empty?)
+      else
+        r.push(trace + [k, v]) unless (v.respond_to?(:empty?) && v.empty?)
+      end
+    end
+    r
+  end
+  
 end
