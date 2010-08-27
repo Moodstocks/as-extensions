@@ -40,6 +40,11 @@ Array.class_eval do
     self.map{ |x| x.send(sym.to_sym, *args) }
   end
   
+  # Reverse map_m: members are arguments
+  def map_mr(sym, obj)
+    self.map{ |x| obj.send(sym.to_sym, x) }
+  end
+  
   # Map a function (ie. Method object) to members
   def map_f(f, *args)
     self.map{ |x| f.call(self, *args) }
