@@ -19,6 +19,23 @@
 
 Hash.class_eval do
   
+  class << self
+    
+    # See Hash#normalize. This does the opposite.
+    def renormalize(array)
+      r = {}
+      array.each do |l|
+        s = r
+        l[0..-3].each do |x|
+          s = (s[x] ||= {})
+        end
+        s[l[-2]] = l.last
+      end
+      r
+    end
+    
+  end # class << self
+  
   # Cast keys to symbols.
   def to_sym
     inject({}) do |h, (k,v)|
@@ -34,7 +51,7 @@ Hash.class_eval do
   
   # Transforms a hash-based tree into an array of arrays
   # Example input: {'a'=>'aa', 'b' => {'ba' => 'baa', 'bb' => 'bba'}}
-  # Example output: 
+  # Example output: [["a", "aa"], ["b", "bb", "bba"], ["b", "ba", "baa"]]
   def denormalize(trace=[])
     r = []
     self.each_pair do |k,v|
