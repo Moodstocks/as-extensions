@@ -29,7 +29,13 @@ Hash.class_eval do
         l[0..-3].each do |x|
           s = (s[x] ||= {})
         end
-        s[l[-2]] = l.last
+        if s[l[-2]].nil?
+          s[l[-2]] = l.last
+        elsif s[l[-2]].nil?.is_a?(Array)
+          s[l[-2]].push(l.last)
+        else
+          s[l[-2]] = [s[l[-2]], l.last]
+        end
       end
       r
     end
@@ -53,16 +59,22 @@ Hash.class_eval do
   # Example input: {'a'=>'aa', 'b' => {'ba' => 'baa', 'bb' => 'bba'}}
   # Example output: [["a", "aa"], ["b", "bb", "bba"], ["b", "ba", "baa"]]
   def denormalize(trace=[])
-    r = []
+    r = Set.new
     self.each_pair do |k,v|
       if v.is_a?(Hash)
         l = v.denormalize(trace + [k])
-        l.map_mr(:push, r) unless (r.respond_to?(:empty?) && r.empty?)
+        l.each do |x|
+          r.merge(l) unless (l.respond_to?(:empty?) && l.empty?)
+        end
+      elsif v.is_a?(Array) || v.is_a?(::Set)
+        v.each do |x|
+          r.add(trace + [k, x])
+        end
       else
-        r.push(trace + [k, v]) unless (v.respond_to?(:empty?) && v.empty?)
+        r.add(trace + [k, v]) unless (v.respond_to?(:empty?) && v.empty?)
       end
     end
-    r
+    r.to_a
   end
   
 end
