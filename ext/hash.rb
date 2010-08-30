@@ -42,13 +42,7 @@ Hash.class_eval do
     
   end # class << self
   
-  # Cast keys to symbols.
-  def to_sym
-    inject({}) do |h, (k,v)|
-      h[k.to_sym] = v
-      h
-    end
-  end
+  alias :to_sym :symbolize_keys
   
   # Call ASE::deepcompact(self)
   def deepcompact
