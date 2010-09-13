@@ -34,7 +34,7 @@ module ActiveSupport module Extension module String
         else
           ASE::need 'open-uri'
           args = uri.userinfo ? { :http_basic_authentication => uri.userinfo.split(':') } : {}
-          uri.open(args) do |f| return io_to_string(f, is_gz) end
+          uri.open(args) do |f| return IO::to_string(f, is_gz) end
       end # case
     end
     
