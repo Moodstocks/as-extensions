@@ -33,6 +33,10 @@ module ActiveSupport module Extension
       exit! if level == :fatal
       nil
     end
+    
+    def log_level=(level=(:warn))
+      LOGGER.level = level.is_a?(Symbol) ? Logger.const_get(level.to_s.upcase) : level
+    end
   
     # Run a block with logging disabled
     def silently
