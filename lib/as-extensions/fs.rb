@@ -26,6 +26,7 @@ module ActiveSupport module Extension
     def ensure_dir_exists(dir)
       dir = File.expand_path(dir)
       FileUtils.mkdir_p dir unless File.exist?(dir)
+      dir
     end
     
     # Return the first file that exists in a list of files
