@@ -25,7 +25,7 @@ module ActiveSupport module Extension
   class << self
   
     # Require a gem / gems on the fly.
-    # Returns true if the gem was successfuly loaded, nil otherwise.
+    # Raises an exception if the load fails.
     def need(ext)
       if ext.is_a?(::Array)
         ext.each do |e| need(e) end
@@ -34,7 +34,8 @@ module ActiveSupport module Extension
         begin
           require ext
         rescue Exception
-          return ASE::log("Couldn't load \"#{ext}\".", :error)
+          ASE::log("Couldn't load \"#{ext}\".", :error)
+          raise
         end
         NEEDED[ext] = true
       end
