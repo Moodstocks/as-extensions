@@ -71,4 +71,24 @@ Hash.class_eval do
     r.to_a
   end
   
+  # Get a node in a recursive hash structure and create intermediate hashes if needed.
+  # Example:
+  #   a = {}
+  #   a.get!(:a, :b, :c) # => nil
+  #   a # => {:a=>{:b=>{}}}
+  # You can pass a block to set the default value for the leaf:
+  #   a = {}
+  #   a.get!(:a, :b, :c) { :d } # => :d
+  #   a # => {:a=>{:b=>{:c=>:d}}}
+  def get!(*nodes, &blk)
+    return self if (l = nodes.length) == 0
+    if block_given?
+      if l == 1 then self[nodes.head] ||= yield
+      else (self[nodes.head] ||= {}).get!(*(nodes.tail), &blk) end
+    else
+      if l == 1 then self[nodes.head]
+      else (self[nodes.head] ||= {}).get!(*(nodes.tail)) end
+    end
+  end
+  
 end
