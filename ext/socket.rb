@@ -21,16 +21,20 @@ Socket.class_eval do
   
   class << self
     # Thanks to 'coderrr'
-    def local_ip
-      # turn off reverse DNS resolution temporarily
-      orig, do_not_reverse_lookup = do_not_reverse_lookup, true
-      UDPSocket.open do |s|
-        s.connect('184.106.196.237', 1)
-        s.addr.last
+    def local_ip(force_reload=false)
+      @ase_local_ip = nil if force_reload
+      @ase_local_ip ||= begin
+        # turn off reverse DNS resolution temporarily
+        orig, do_not_reverse_lookup = do_not_reverse_lookup, true
+        UDPSocket.open do |s|
+          s.connect('184.106.196.237', 1)
+          s.addr.last
+        end
+      ensure
+        do_not_reverse_lookup = orig
       end
-    ensure
-      do_not_reverse_lookup = orig
     end
+    
   end
   
 end
