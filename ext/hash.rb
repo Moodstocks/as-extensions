@@ -91,4 +91,14 @@ Hash.class_eval do
     end
   end
   
+  # Same logic as get! but for setting values.
+  # Example:
+  #   {}.set!(:a, :b, :c) { :d } # => {:a=>{:b=>{:c=>:d}}}
+  def set!(*nodes, &blk)
+    raise "Hash#set! takes a block and at least an argument." unless (block_given? && (l = nodes.length) > 0)
+    if l == 1 then self[nodes.head] = yield
+    else (self[nodes.head] ||= {}).set!(*(nodes.tail), &blk) end
+    self
+  end
+  
 end
