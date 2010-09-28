@@ -18,21 +18,27 @@
 #++
 
 Array.class_eval do
-
-  alias :head :first
   
-  def tail
-    self[1..-1]
+  # Boolean map: same as map but returns a boolean intersection of the resulting values.
+  # Hence, the return type of this is a boolean.
+  def bmap(&blk)
+    map(&blk).inject{ |s,x| s && x }
   end
-
+  
   # Call ASE::deepcompact(self)
   def deepcompact
     ActiveSupport::Extension::deepcompact(self)
   end
   
-  # Return a random element.
-  def pick
-    self[Kernel.rand(size)]
+  alias :head :first
+  
+  def init
+    self[0..-2]
+  end
+  
+  # Map a function (ie. Method object) to members
+  def map_f(f, *args)
+    self.map{ |x| f.call(self, *args) }
   end
   
   # Map a method of members to themselves
@@ -45,15 +51,13 @@ Array.class_eval do
     self.map{ |x| obj.send(sym.to_sym, x) }
   end
   
-  # Map a function (ie. Method object) to members
-  def map_f(f, *args)
-    self.map{ |x| f.call(self, *args) }
+  # Return a random element.
+  def pick
+    self[Kernel.rand(size)]
   end
   
-  # Boolean map: same as map but returns a boolean intersection of the resulting values.
-  # Hence, the return type of this is a boolean.
-  def bmap(&blk)
-    map(&blk).inject{ |s,x| s && x }
+  def tail
+    self[1..-1] || []
   end
   
 end
