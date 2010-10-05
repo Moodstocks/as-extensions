@@ -52,8 +52,8 @@ Array.class_eval do
   end
   
   # Return a random element.
-  def pick
-    self[Kernel.rand(size)]
+  def pick(secure=false)
+    self[secure ? ActiveSupport::SecureRandom.random_number(size) : Kernel.rand(size)]
   end
   
   def tail

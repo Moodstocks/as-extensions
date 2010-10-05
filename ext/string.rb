@@ -27,9 +27,9 @@ String.class_eval do
     end
     
     # Return an alphanumeric string.
-    def rand_alphanum(n=1)
+    def rand_alphanum(n=1, secure=false)
       @as_alphanum ||= [('a'..'z'), ('A'..'Z'), ('0'..'9')].map{ |x| x.to_a }.flatten
-      Array.new(n){ @as_alphanum.pick }.join
+      Array.new(n){ @as_alphanum.pick(secure) }.join
     end
     
   end # class << self
