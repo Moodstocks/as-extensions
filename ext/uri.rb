@@ -29,11 +29,19 @@ URI.class_eval do
       if uri.is_a?(String)
         uri = encode(uri)
         if uri.match(ASE_UNSAFE_CHARS) && ( (s1 = uri.split('://')).length == 2 )
-          s2 = s1[1].split(':')
-          if s2[0].match(ASE_UNSAFE_CHARS)
-            '~[]'.chars.each { |c| s2[0].gsub!(c, "%#{c.unpack("H2").first.upcase}") }
-            s1[1] = s2.join(':')
-            uri = s1.join('://')
+          if s1.last.chars.first == '[' # IPv6 (RFC 2732)
+            if (s2 = s1.last.split(']')).length > 1
+              s2 = [s2.head, s2.tail.join(']')]
+              if s2.last.match(ASE_UNSAFE_CHARS)
+                '~[]'.chars.each { |c| s2.last.gsub!(c, "%#{c.unpack("H2").first.upcase}") }
+                uri = "#{s1.first}://#{s2.first}]#{s2.last}"
+              end
+            end
+          else # IPv4 or DN
+            if s1.last.match(ASE_UNSAFE_CHARS)
+              '~[]'.chars.each { |c| s1.last.gsub!(c, "%#{c.unpack("H2").first.upcase}") }
+              uri = s1.join('://')
+            end
           end
         end
       end
