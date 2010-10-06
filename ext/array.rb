@@ -30,10 +30,21 @@ Array.class_eval do
     ActiveSupport::Extension::deepcompact(self)
   end
   
+  def first=(x)
+    raise IndexError, 'empty array' if empty?
+    self[0] = x
+  end
+  
   alias :head :first
+  alias :head= :first=
   
   def init
     self[0..-2]
+  end
+  
+  def last=(x)
+    raise IndexError, 'empty array' if empty?
+    self[-1]
   end
   
   # Map a function (ie. Method object) to members
