@@ -62,6 +62,10 @@ module ActiveSupport module Extension module Test
       assert b == false, msg
     end
     
+    def assert_include(a, b, msg=nil)
+      assert b.include?(a), msg_stack(msg, "#{b} does not include #{a}")
+    end
+    
     def assert_instance_of(k=nil, x=nil, msg=nil)
       assert x.instance_of?(k), msg
     end
