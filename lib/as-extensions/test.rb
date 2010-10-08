@@ -51,7 +51,7 @@ module ActiveSupport module Extension module Test
     end
     
     def assert_equal(a, b, msg=nil)
-      assert a == b, msg_stack(msg, "#{b} found, expected #{a}")
+      assert a == b, msg_stack(msg, "#{b.inspect} found, expected #{a.inspect}")
     end
     
     def assert_fail(msg=nil)
@@ -63,7 +63,7 @@ module ActiveSupport module Extension module Test
     end
     
     def assert_include(a, b, msg=nil)
-      assert b.include?(a), msg_stack(msg, "#{b} does not include #{a}")
+      assert b.include?(a), msg_stack(msg, "#{b.inspect} does not include #{a.inspect}")
     end
     
     def assert_instance_of(k=nil, x=nil, msg=nil)
@@ -79,7 +79,7 @@ module ActiveSupport module Extension module Test
     end
     
     def assert_not_equal(a, b, msg=nil)
-      assert a != b, msg_stack(msg, "#{b} and #{a} are equal")
+      assert a != b, msg_stack(msg, "#{b.inspect} and #{a.inspect} are equal")
     end
     
     def assert_not_nil(x=nil, msg=nil)
