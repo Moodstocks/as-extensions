@@ -19,10 +19,19 @@
 
 Array.class_eval do
   
-  # Boolean map: same as map but returns a boolean intersection of the resulting values.
-  # Hence, the return type of this is a boolean.
+  # Boolean AND of elements
+  def band
+    inject{ |s,x| s && x }
+  end
+  
+  # For compatibility purpose.
   def bmap(&blk)
-    map(&blk).inject{ |s,x| s && x }
+    map(&blk).band
+  end
+  
+  # Boolean OR of elements
+  def bor
+    inject{ |s,x| s || x }
   end
   
   # Call ASE::deepcompact(self)
