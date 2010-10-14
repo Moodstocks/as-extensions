@@ -50,6 +50,10 @@ module ActiveSupport module Extension module Test
       assert (b == true || b == false), msg_stack(msg, "Expected a boolean, found a #{b.class}.")
     end
     
+    def assert_empty(x=1, msg=nil)
+      assert x.empty?, msg
+    end
+    
     def assert_equal(a, b, msg=nil)
       assert a == b, msg_stack(msg, "#{b.inspect} found, expected #{a.inspect}")
     end
