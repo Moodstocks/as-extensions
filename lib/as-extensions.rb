@@ -44,17 +44,17 @@ module ActiveSupport module Extension
         require File.join(dir, ext)
       end
     end
-
+    
   end # class << self
-
+  
   # This loading order (need, logger, log) is necessary to bootstrap need()
   ASE::require_part 'need'
   ASE::need 'logger'
   ASE::require_part 'log'
   
   # Now we can load everything normally
-  ASE::need %w{ active_support fileutils uri socket }
-  ASE::require_part %w{ fs enum deep slugstring test time ext-logic }
+  ASE::need %w{ active_support fileutils open-uri uri socket }
+  ASE::require_part %w{ fs enum deep net slugstring test time ext-logic }
   ASE::require_ext %w{ array datetime dir hash io object set socket string symbol time uri }
-
+  
 end end
