@@ -82,12 +82,22 @@ Hash.class_eval do
   #   a # => {:a=>{:b=>{:c=>:d}}}
   def get!(*nodes, &blk)
     return self if (l = nodes.length) == 0
+    nh = nodes.head
     if block_given?
-      if l == 1 then self[nodes.head] ||= yield
-      else (self[nodes.head] ||= {}).get!(*(nodes.tail), &blk) end
+      if l == 1
+        self[nh] ||= yield
+        self[nh]
+      else
+        self[nh] ||= {}
+        self[nh].get!(*(nodes.tail), &blk)
+      end
     else
-      if l == 1 then self[nodes.head]
-      else (self[nodes.head] ||= {}).get!(*(nodes.tail)) end
+      if l == 1
+        self[nh]
+      else
+        self[nh] ||= {}
+        self[nh].get!(*(nodes.tail))
+      end
     end
   end
   
@@ -97,7 +107,7 @@ Hash.class_eval do
   def set!(*nodes, &blk)
     raise "Hash#set! takes a block and at least an argument." unless (block_given? && (l = nodes.length) > 0)
     if l == 1 then self[nodes.head] = yield
-    else (self[nodes.head] ||= {}).set!(*(nodes.tail), &blk) end
+    else ( self.get!(*nodes.init) {{}} ).set!(nodes.last, &blk) end
     self
   end
   
