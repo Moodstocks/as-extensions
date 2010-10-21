@@ -55,6 +55,6 @@ module ActiveSupport module Extension
   # Now we can load everything normally
   ASE::need %w{ active_support fileutils open-uri uri socket }
   ASE::require_part %w{ fs enum deep net slugstring test time ext-logic }
-  ASE::require_ext %w{ array datetime dir hash io object set socket string symbol time uri }
+  ASE::require_ext %w{ array datetime dir file hash io object set socket string symbol time uri }
   
 end end
