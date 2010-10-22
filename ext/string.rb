@@ -48,6 +48,11 @@ String.class_eval do
     underscore.dasherize_noase
   end
   
+  # When a method doesn't exist, consider the string as an array of chars
+  def method_missing(method_sym, *arguments, &block)
+    chars.to_a.send(method_sym, *arguments, &block).join
+  end
+  
   # Helper to convert a raw string to a sane identifier with dashes and ASCII letters.
   # Interpolation is here to force String type, to_s won't always work.
   String.class_eval do
