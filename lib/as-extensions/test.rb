@@ -78,6 +78,10 @@ module ActiveSupport module Extension module Test
       assert x.kind_of?(k), msg
     end
     
+    def assert_looksame(a, b, msg=nil)
+      assert_equal(a.inspect, b.inspect, msg)
+    end
+    
     def assert_nil(x=1, msg=nil)
       assert x.nil?, msg
     end
