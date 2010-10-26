@@ -103,13 +103,13 @@ Hash.class_eval do
   
   # Keep all keys except those in array x
   def kexcept(x)
-    if x.is_a?(Hash) then reject{ |k,v| x.include?(k) }
+    if x.is_a?(Array) then reject{ |k,v| x.include?(k) }
     else kexcept([x]) end
   end
   
   # Keep only keys in array x
   def konly(x)
-    if x.is_a?(Hash) then select{ |k,v| x.include?(k) }
+    if x.is_a?(Array) then select{ |k,v| x.include?(k) }
     else konly([x]) end
   end
   
