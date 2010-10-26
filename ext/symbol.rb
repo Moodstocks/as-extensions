@@ -19,10 +19,10 @@
 
 Symbol.class_eval do
   
-  # Same as String#classify.
-  # Note that this method returns a String, not a symbol.
-  def classify
-    to_s.classify
+  # When a method doesn't exist, consider the Symbol as a String
+  # Warning: this will *not* convert back to Symbol
+  def method_missing(method_sym, *arguments, &block)
+    to_s.send(method_sym, *arguments, &block)
   end
   
 end
