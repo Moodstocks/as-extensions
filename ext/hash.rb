@@ -42,11 +42,23 @@ Hash.class_eval do
     
   end # class << self
   
-  alias :to_sym :symbolize_keys
-  
   # Call ASE::deepcompact(self)
   def deepcompact
     ActiveSupport::Extension::deepcompact(self)
+  end
+  
+  # Same logic as get! but for deleting values.
+  # Examples with h = {:a=>{:b=>{:c=>:d}}}:
+  #   h.del!(:a, :b, :c) # => {:a=>{:b=>{}}}
+  #   h.del!(:a, :b){|x| x[:c] == :z} # => {:a=>{:b=>{:c=>:d}}}
+  #   h.del!(:a, :b){|x| x[:c] == :d} # => {:a=>{}}
+  def del!(*nodes, &blk)
+    if nodes.length == 1
+      self.delete(nodes.head) if ( (!block_given?) || blk.call(self[nodes.head]) )
+    else
+      ( self.get!(*nodes.init) {{}} ).del!(nodes.last, &blk)
+    end
+    self
   end
   
   # Transforms a hash-based tree into an array of arrays
@@ -123,18 +135,6 @@ Hash.class_eval do
     self
   end
   
-  # Same logic as get! but for deleting values.
-  # Examples with h = {:a=>{:b=>{:c=>:d}}}:
-  #   h.del!(:a, :b, :c) # => {:a=>{:b=>{}}}
-  #   h.del!(:a, :b){|x| x[:c] == :z} # => {:a=>{:b=>{:c=>:d}}}
-  #   h.del!(:a, :b){|x| x[:c] == :d} # => {:a=>{}}
-  def del!(*nodes, &blk)
-    if nodes.length == 1
-      self.delete(nodes.head) if ( (!block_given?) || blk.call(self[nodes.head]) )
-    else
-      ( self.get!(*nodes.init) {{}} ).del!(nodes.last, &blk)
-    end
-    self
-  end
+  alias :to_sym :symbolize_keys
   
 end
