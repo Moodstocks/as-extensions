@@ -139,13 +139,17 @@ Hash.class_eval do
     self
   end
   
+  def to_map
+    self.is_a?(Map) ? self : Map(self)
+  end
+  
   alias :to_sym :symbolize_keys
   
   private
   
   def eq_canonize(d) # helper for equiv?
     if d.is_a?(Hash)
-      Map(d).inject(Map.new){ |h,(k,v)| h.set!(k){eq_canonize(v)} }.sort{ |x,y| x[0] <=> y[0] }
+      d.to_map.inject(Map.new){ |h,(k,v)| h.set!(k){eq_canonize(v)} }.sort{ |x,y| x[0] <=> y[0] }
     else d end
   end
   
