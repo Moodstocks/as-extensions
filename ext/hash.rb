@@ -83,6 +83,10 @@ Hash.class_eval do
     r.to_a
   end
   
+  def equiv?(x)
+    eq_canonize(self).inspect == eq_canonize(x).inspect
+  end
+  
   # Get a node in a recursive hash structure and create intermediate hashes if needed.
   # Example:
   #   a = {}
@@ -136,5 +140,13 @@ Hash.class_eval do
   end
   
   alias :to_sym :symbolize_keys
+  
+  private
+  
+  def eq_canonize(d) # helper for equiv?
+    if d.is_a?(Hash)
+      Map(d).inject(Map.new){ |h,(k,v)| h.set!(k){eq_canonize(v)} }.sort{ |x,y| x[0] <=> y[0] }
+    else d end
+  end
   
 end
