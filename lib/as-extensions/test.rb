@@ -45,7 +45,11 @@ module ActiveSupport module Extension module Test
         return false
       end
     end
-  
+    
+    def assert_blank(x='a', msg=nil)
+      assert x.blank?, msg
+    end
+    
     def assert_boolean(b=nil, msg=nil)
       assert (b == true || b == false), msg_stack(msg, "Expected a boolean, found a #{b.class}.")
     end
@@ -84,6 +88,14 @@ module ActiveSupport module Extension module Test
     
     def assert_nil(x=1, msg=nil)
       assert x.nil?, msg
+    end
+    
+    def assert_not_blank(x='', msg=nil)
+      assert !x.blank?, msg
+    end
+    
+    def assert_not_empty(x=[], msg=nil)
+      assert !x.empty?, msg
     end
     
     def assert_not_equal(a, b, msg=nil)
