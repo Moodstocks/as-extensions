@@ -80,4 +80,15 @@ Array.class_eval do
     self[1..-1] || []
   end
   
+  # See vsum for an example of what this does
+  def vapply(x)
+    head.zip(*tail).map_m(x)
+  end
+  
+  # Vector sum
+  # For instance: [[1,2],[1,3]].vsum => [2,5]
+  def vsum
+    vapply(:sum)
+  end
+  
 end
