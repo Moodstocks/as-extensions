@@ -118,15 +118,13 @@ Hash.class_eval do
   end
   
   # Keep all keys except those in array x
-  def kexcept(x)
-    if x.is_a?(Array) then reject{ |k,v| x.include?(k) }
-    else kexcept([x]) end
+  def kexcept(*x)
+    reject{ |k,v| x.include?(k) }
   end
   
   # Keep only keys in array x
-  def konly(x)
-    if x.is_a?(Array) then select{ |k,v| x.include?(k) }
-    else konly([x]) end
+  def konly(*x)
+    reject{ |k,v| !x.include?(k) }
   end
   
   def map_keys
