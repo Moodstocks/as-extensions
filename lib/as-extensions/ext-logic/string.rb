@@ -17,7 +17,7 @@
 # limitations under the License.
 #++
 
-module ActiveSupport module Extension module String
+module ASE module String
   class << self
     
     # Load a string from a file or a URL.
@@ -39,4 +39,4 @@ module ActiveSupport module Extension module String
     end
     
   end # class << self
-end end end
+end end

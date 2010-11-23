@@ -17,8 +17,4 @@
 # limitations under the License.
 #++
 
-module ActiveSupport module Extension
-
-  ASE::require_part %w{ io string }
-
-end end
+ASE::require_part %w{ io string }

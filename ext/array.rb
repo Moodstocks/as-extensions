@@ -36,7 +36,7 @@ Array.class_eval do
   
   # Call ASE::deepcompact(self)
   def deepcompact
-    ActiveSupport::Extension::deepcompact(self)
+    ASE::deepcompact(self)
   end
   
   def first=(x)

@@ -23,7 +23,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-module ActiveSupport module Extension
+module ASE
 
   # This class provides some string-manipulation methods specific to slugs.
   # Its Unicode support is provided by ActiveSupport::Multibyte::Chars; this
@@ -419,4 +419,4 @@ module ActiveSupport module Extension
 
   end
   
-end end
+end

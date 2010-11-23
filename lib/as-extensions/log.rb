@@ -17,7 +17,7 @@
 # limitations under the License.
 #++
 
-module ActiveSupport module Extension
+module ASE
   
   # Initialize logger
   LOGGER = Logger.new(STDERR)
@@ -49,4 +49,4 @@ module ActiveSupport module Extension
   
   end # class << self 
   
-end end
+end

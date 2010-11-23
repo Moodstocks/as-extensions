@@ -17,7 +17,7 @@
 # limitations under the License.
 #++
 
-module ActiveSupport module Extension
+module ASE
   
   # To store gems already need()ed
   NEEDED = {}
@@ -43,4 +43,4 @@ module ActiveSupport module Extension
   
   end # class << self
   
-end end
+end

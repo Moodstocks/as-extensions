@@ -17,7 +17,7 @@
 # limitations under the License.
 #++
 
-module ActiveSupport module Extension module IO
+module ASE module IO
   class << self
     
     # Read from an IO stream that can be compressed
@@ -31,4 +31,4 @@ module ActiveSupport module Extension module IO
     end
     
   end # class << self
-end end end
+end end

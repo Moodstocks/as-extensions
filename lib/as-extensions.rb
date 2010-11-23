@@ -17,10 +17,8 @@
 # limitations under the License.
 #++
 
-module ActiveSupport module Extension
-  
-  ASE = self
-  
+module ASE
+    
   class << self
     
     # Require a part / parts of a library
@@ -48,13 +46,15 @@ module ActiveSupport module Extension
   end # class << self
   
   # This loading order (need, logger, log) is necessary to bootstrap need()
-  ASE::require_part 'need'
-  ASE::need 'logger'
-  ASE::require_part 'log'
+  require_part 'need'
+  need 'logger'
+  require_part 'log'
   
   # Now we can load everything normally
-  ASE::need %w{ active_support fileutils map open-uri uri socket }
-  ASE::require_part %w{ fs enum deep net slugstring test time ext-logic }
-  ASE::require_ext %w{ array datetime dir file hash io object set socket string symbol time uri }
+  need %w{ active_support fileutils map open-uri uri socket }
+  require_part %w{ fs enum deep net slugstring test time ext-logic }
+  require_ext %w{ array datetime dir file hash io object set socket string symbol time uri }
   
-end end
+end
+
+ActiveSupport::const_set('Extension', ASE) unless ActiveSupport::const_defined?('Extension')

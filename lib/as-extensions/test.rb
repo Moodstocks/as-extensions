@@ -21,7 +21,7 @@
 # Their main advantage over unit/test
 # is that they can run tests in isolation.
 
-module ActiveSupport module Extension module Test
+module ASE module Test
     
   CONFIG = { :verbose => (ARGV.include?('verbose')),
              :fatal => (ARGV.include?('fatal')),
@@ -152,4 +152,4 @@ module ActiveSupport module Extension module Test
     
   end # class << self
   
-end end end
+end end

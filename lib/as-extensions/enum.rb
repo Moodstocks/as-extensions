@@ -17,7 +17,7 @@
 # limitations under the License.
 #++
 
-module ActiveSupport module Extension
+module ASE
   
   class Enum
     class << self
@@ -61,4 +61,4 @@ module ActiveSupport module Extension
     
   end # class << self
   
-end end
+end

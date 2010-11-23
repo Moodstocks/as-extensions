@@ -44,7 +44,7 @@ Hash.class_eval do
   
   # Call ASE::deepcompact(self)
   def deepcompact
-    ActiveSupport::Extension::deepcompact(self)
+    ASE::deepcompact(self)
   end
   
   # Same logic as get! but for deleting values.

@@ -1,4 +1,4 @@
-# ActiveSupport::Extension (as-extensions)
+# ASE (as-extensions)
 
 ## Purpose
 

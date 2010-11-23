@@ -17,7 +17,7 @@
 # limitations under the License.
 #++
 
-module ActiveSupport module Extension
+module ASE
   
   # Ruby Time classes are a mess. This module attempts to restore
   # order by making bold choices.
@@ -64,4 +64,4 @@ module ActiveSupport module Extension
   
   end # module Time
   
-end end
+end
