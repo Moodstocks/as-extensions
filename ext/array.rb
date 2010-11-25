@@ -67,8 +67,8 @@ Array.class_eval do
   end
   
   # Reverse map_m: members are arguments
-  def map_mr(sym, obj)
-    self.map{ |x| obj.send(sym.to_sym, x) }
+  def map_mr(sym, obj, *args)
+    self.map{ |x| obj.send(sym.to_sym, x, *args) }
   end
   
   # Return a random element.
