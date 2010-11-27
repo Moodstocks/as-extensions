@@ -51,8 +51,9 @@ module ASE
   require_part 'log'
   
   # Now we can load everything normally
-  need %w{ active_support fileutils map open-uri uri socket }
-  require_part %w{ fs enum deep net slugstring test time ext-logic }
+  need %w{ active_support babosa fileutils map open-uri pathname uri set socket }
+  need %w{ active_support/core_ext }
+  require_part %w{ fs enum deep net test time ext-logic }
   require_ext %w{ array datetime dir enumerable file hash io object set socket string symbol time uri }
   
 end

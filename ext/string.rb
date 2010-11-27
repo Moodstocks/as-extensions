@@ -55,10 +55,8 @@ String.class_eval do
   
   # Helper to convert a raw string to a sane identifier with dashes and ASCII letters.
   # Interpolation is here to force String type, to_s won't always work.
-  String.class_eval do
-    def sanitize_dashes
-      "#{ASE::SlugString.new(self).approximate_ascii.to_ascii.normalize.to_s}"
-    end
+  def sanitize_dashes
+    "#{self.to_slug.approximate_ascii.to_ascii.normalize.to_s}"
   end
   
   # Sometimes calling puts as a method can be useful

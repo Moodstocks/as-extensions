@@ -12,6 +12,9 @@ begin
     gemspec.authors = ["Pierre Chapuis"]
     gemspec.files = FileList['lib/**/*.rb', 'ext/*.rb']
     gemspec.add_dependency 'activesupport'
+    gemspec.add_dependency 'babosa'
+    gemspec.add_dependency 'i18n'
+    gemspec.add_dependency 'map'
   end
 rescue LoadError
   puts "Jeweler is not available, please install it first."
