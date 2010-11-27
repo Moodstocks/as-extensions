@@ -28,8 +28,8 @@ String.class_eval do
     
     # Return an alphanumeric string.
     def rand_alphanum(n=1, secure=false)
-      @as_alphanum ||= [('a'..'z'), ('A'..'Z'), ('0'..'9')].map{ |x| x.to_a }.flatten
-      Array.new(n){ @as_alphanum.pick(secure) }.join
+      @ase_alphanum ||= [('a'..'z'), ('A'..'Z'), ('0'..'9')].map{ |x| x.to_a }.flatten
+      Array.new(n){ @ase_alphanum.pick(secure) }.join
     end
     
   end # class << self
@@ -61,7 +61,7 @@ String.class_eval do
   
   # Sometimes calling puts as a method can be useful
   def puts
-    puts self
+    Kernel::puts self
   end
   alias :p :puts
   
