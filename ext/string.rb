@@ -21,6 +21,8 @@ String.class_eval do
   
   class << self
     
+    attr_accessor :ase_array_methods
+    
     # Load a string from a file or a URL.
     def from(file_or_url)
       ASE::String::from(file_or_url)
@@ -48,9 +50,11 @@ String.class_eval do
     underscore.dasherize_noase
   end
   
-  # When a method doesn't exist, consider the string as an array of chars
+  # Consider the String as an Array of chars for a few methods
   def method_missing(method_sym, *arguments, &block)
-    chars.to_a.send(method_sym, *arguments, &block).join
+    String.ase_array_methods ||= %w{first first= head head= init last last= tail}.map_m(:to_sym)
+    if String.ase_array_methods.include?(method_sym.to_s) then chars.to_a.send(method_sym, *arguments, &block).join
+    else super end
   end
   
   # Helper to convert a raw string to a sane identifier with dashes and ASCII letters.

@@ -22,7 +22,7 @@ Enumerable.class_eval do
   # When a method doesn't exist, convert to an Array
   def method_missing(method_sym, *arguments, &block)
     if !is_a?(Array) && respond_to?(:to_a) then to_a.send(method_sym, *arguments, &block)
-    else raise NoMethodError.new("undefined method `#{method}' for #{self.inspect}") end
+    else super end
   end
   
 end
