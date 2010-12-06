@@ -53,7 +53,7 @@ Array.class_eval do
   
   def last=(x)
     raise IndexError, 'empty array' if empty?
-    self[-1]
+    self[-1] = x
   end
   
   # Map a function (ie. Method object) to members
