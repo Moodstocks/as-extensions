@@ -17,6 +17,9 @@
 # limitations under the License.
 #++
 
+# Force KCODE to UTF-8, a sane default
+$KCODE = "U" if $KCODE == "NONE"
+
 module ASE
     
   class << self
