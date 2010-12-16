@@ -53,7 +53,7 @@ String.class_eval do
   # Consider the String as an Array of chars for a few methods
   def method_missing(method_sym, *arguments, &block)
     String.ase_array_methods ||= %w{first first= head head= init last last= tail}.map_m(:to_sym)
-    if String.ase_array_methods.include?(method_sym.to_s) then chars.to_a.send(method_sym, *arguments, &block).join
+    if String.ase_array_methods.include?(method_sym) then chars.to_a.send(method_sym, *arguments, &block).join
     else super end
   end
   
