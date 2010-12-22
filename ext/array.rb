@@ -66,6 +66,11 @@ Array.class_eval do
     self.map{ |x| x.send(sym.to_sym, *args) }
   end
   
+  # In-place version of map_m
+  def map_m!(sym, *args)
+    self.map!{ |x| x.send(sym.to_sym, *args) }
+  end
+  
   # Reverse map_m: members are arguments
   def map_mr(sym, obj, *args)
     self.map{ |x| obj.send(sym.to_sym, x, *args) }
