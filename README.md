@@ -22,4 +22,4 @@ Read the RDoc if you use them.
 
 ## Copyright
 
-Copyright (c) 2010 Moodstocks SAS
+Copyright (c) 2010-2011 Moodstocks SAS
