@@ -19,29 +19,14 @@
 
 module ASE
   
-  # To store gems already need()ed
-  NEEDED = {}
+  EXTRA_EXT = %w{ libxml }
   
   class << self
-  
-    # Require a gem / gems on the fly.
-    # Raises an exception if the load fails.
-    def need(ext)
-      if ext.is_a?(::Array)
-        ext.each do |e| need(e) end
-      else
-        return true if NEEDED[ext]
-        begin
-          require ext
-        rescue Exception
-          ASE::log("Couldn't load \"#{ext}\".", :error)
-          raise
-        end
-        load_extra_ext(ext)
-        NEEDED[ext] = true
-      end
-    end
-  
+    
+    def load_extra_ext(ext)
+      require_part(ext) if EXTRA_EXT.include?(ext)
+    end  
+    
   end # class << self
   
 end

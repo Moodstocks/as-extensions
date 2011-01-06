@@ -48,8 +48,8 @@ module ASE
     
   end # class << self
   
-  # This loading order (need, logger, log) is necessary to bootstrap need()
-  require_part 'need'
+  # This loading order (extra-ext, need, logger, log) is necessary to bootstrap need()
+  require_part %w{ extra-ext need }
   need 'logger'
   require_part 'log'
   
