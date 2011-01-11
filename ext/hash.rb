@@ -70,7 +70,7 @@ Hash.class_eval do
       if v.is_a?(Hash)
         l = v.denormalize(trace + [k])
         l.each do |x|
-          r.merge(l) unless (l.respond_to?(:empty?) && l.empty?)
+          r.merge!(l) unless (l.respond_to?(:empty?) && l.empty?)
         end
       elsif v.is_a?(Array) || v.is_a?(::Set)
         v.each do |x|
@@ -128,11 +128,11 @@ Hash.class_eval do
   end
   
   def map_keys
-    self.inject(self.class.new){ |h,(k,v)| h.merge( (yield k) => v ) }
+    self.inject(self.class.new){ |h,(k,v)| h.merge!( (yield k) => v ) }
   end
   
   def map_values
-    self.inject(self.class.new){ |h,(k,v)| h.merge( k => (yield v) ) }
+    self.inject(self.class.new){ |h,(k,v)| h.merge!( k => (yield v) ) }
   end
   
   # Same logic as get! but for setting values.
