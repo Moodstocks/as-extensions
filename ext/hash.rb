@@ -135,6 +135,10 @@ Hash.class_eval do
     self.inject(self.class.new){ |h,(k,v)| h.merge!( k => (yield v) ) }
   end
   
+  def map_values!
+    self.each_pair{ |k,v| self[k] = (yield v) }; self
+  end
+  
   # Same logic as get! but for setting values.
   # Example:
   #   {}.set!(:a, :b, :c) { :d } # => {:a=>{:b=>{:c=>:d}}}

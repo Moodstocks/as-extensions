@@ -76,6 +76,11 @@ Array.class_eval do
     self.map{ |x| obj.send(sym.to_sym, x, *args) }
   end
   
+  # In-place version of map_mr
+  def map_mr!(sym, obj, *args)
+    self.map!{ |x| obj.send(sym.to_sym, x, *args) }
+  end
+  
   # Return a random element.
   def pick(secure=false)
     self[secure ? ActiveSupport::SecureRandom.random_number(size) : Kernel.rand(size)]
