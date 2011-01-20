@@ -23,8 +23,8 @@ module ASE
   
     # Make sure a directory exists;
     # create it if it is not the case.
-    def ensure_dir_exists(dir)
-      dir = File.expand_path(dir)
+    def ensure_dir_exists(dir, *a)
+      dir = File.join(File.expand_path(dir), *a)
       FileUtils.mkdir_p dir unless File.exist?(dir)
       dir
     end
