@@ -102,6 +102,10 @@ module ASE module Test
       assert a != b, msg_stack(msg, "#{b.inspect} and #{a.inspect} are equal")
     end
     
+    def assert_not_include(a, b, msg=nil)
+      assert !b.include?(a), msg_stack(msg, "#{b.inspect} includes #{a.inspect}")
+    end
+    
     def assert_not_nil(x=nil, msg=nil)
       assert !x.nil?, msg
     end
