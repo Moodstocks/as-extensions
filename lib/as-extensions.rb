@@ -18,7 +18,7 @@
 #++
 
 # Force KCODE to UTF-8, a sane default
-$KCODE = "U" if $KCODE == "NONE"
+$KCODE = "U" if (RUBY_VERSION < "1.9") && ($KCODE == "NONE")
 
 module ASE
     
