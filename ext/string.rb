@@ -19,6 +19,8 @@
 
 String.class_eval do
   
+  ASE_ARRAY_METHODS = %w{first first= head head= init last last= tail}.map_m(:to_sym)
+  
   class << self
     
     attr_accessor :ase_array_methods
@@ -51,10 +53,12 @@ String.class_eval do
   end
   
   # Consider the String as an Array of chars for a few methods
-  def method_missing(method_sym, *arguments, &block)
-    String.ase_array_methods ||= %w{first first= head head= init last last= tail}.map_m(:to_sym)
-    if String.ase_array_methods.include?(method_sym) then chars.to_a.send(method_sym, *arguments, &block).join
-    else super end
+  if (RUBY_VERSION < "1.9")
+    def method_missing(n,*a,&b)
+      if ASE_ARRAY_METHODS.include?(n) then chars.to_a.send(n,*a,&b).join else super end
+    end
+  else
+    ASE_ARRAY_METHODS.each{|n| define_method(n){|*a,&b| chars.to_a.send(n,*a,&b).join}}
   end
   
   # Helper to convert a raw string to a sane identifier with dashes and ASCII letters.
