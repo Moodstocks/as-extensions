@@ -1,3 +1,4 @@
+begin; require 'psych'; rescue Object; nil end
 require 'rubygems'
 require './lib/as-extensions.rb'
 
