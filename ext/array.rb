@@ -91,6 +91,7 @@ Array.class_eval do
   end
   
   # See vsum for an example of what this does
+  # Another example: vapply(:to_a) transposes a matrix!
   def vapply(x)
     head.zip(*tail).map_m(x)
   end
