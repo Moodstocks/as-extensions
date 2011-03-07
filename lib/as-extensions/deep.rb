@@ -27,7 +27,7 @@ module ASE; class << self
     elsif x.is_a?(::Hash)
       ret = {}
       x.each_pair do |k,v|
-        ret[k.to_s] = deepcompact(v) if !v.nil?
+        ret[k] = deepcompact(v) if !v.nil?
       end
       ret
     else
