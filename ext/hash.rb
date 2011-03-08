@@ -148,10 +148,11 @@ Hash.class_eval do
     else ( self.get!(*nodes.init) {{}} ).set!(nodes.last, &blk) end
     self
   end
-  
-  def to_map
-    self.is_a?(Map) ? self : Map(self)
-  end
+
+  # WARNING: breaks recent versions of Map
+  # def to_map
+  #   self.is_a?(Map) ? self : Map(self)
+  # end
   
   alias :to_sym :symbolize_keys
   
