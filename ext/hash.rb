@@ -160,7 +160,7 @@ Hash.class_eval do
   
   def eq_canonize(d) # helper for equiv?
     if d.is_a?(Hash)
-      d.to_map.inject(Map.new){ |h,(k,v)| h.set!(k){eq_canonize(v)} }.sort{ |x,y| x[0] <=> y[0] }
+      Map(d).inject(Map.new){ |h,(k,v)| h.set!(k){eq_canonize(v)} }.sort{ |x,y| x[0] <=> y[0] }
     else d end
   end
   
