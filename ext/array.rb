@@ -43,7 +43,15 @@ Array.class_eval do
     raise IndexError, 'empty array' if empty?
     self[0] = x
   end
-  
+
+  def fpop
+    [last,init]
+  end
+
+  def fshift
+    [head,tail]
+  end
+
   alias :head :first
   alias :head= :first=
   
