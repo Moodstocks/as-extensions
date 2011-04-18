@@ -36,6 +36,12 @@ String.class_eval do
       Array.new(n){ @ase_alphanum.pick(secure) }.join
     end
     
+    # Return an hexadecimal string.
+    def rand_hex(n=1, secure=false)
+      @ase_hex ||= "0123456789abcdef".chars
+      Array.new(n){ @ase_hex.pick(secure) }.join
+    end
+    
   end # class << self
   
   alias :camelcase_noase :camelcase
