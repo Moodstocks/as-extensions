@@ -44,12 +44,20 @@ Array.class_eval do
     self[0] = x
   end
 
-  def fpop
-    [last,init]
+  def fpop(n=nil)
+    n.nil? ? [last,init] : [self[(-n)..(-1)],self[0..(-(n+1))]]
   end
 
-  def fshift
-    [head,tail]
+  def fpush(*a)
+    self+a
+  end
+
+  def fshift(n=nil)
+    n.nil? ? [head,tail] : [self[0..(n-1)],self[n..-1]]
+  end
+
+  def funshift(*a)
+    a+self
   end
 
   alias :head :first
