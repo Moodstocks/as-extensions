@@ -18,11 +18,11 @@
 #++
 
 Symbol.class_eval do
-  
+
   # When a method doesn't exist, consider the Symbol as a String
   # Warning: this will *not* convert back to Symbol
-  def method_missing(method_sym, *arguments, &block)
-    to_s.send(method_sym, *arguments, &block)
+  def method_missing(s,*args,&blk)
+    [:to_str,:to_int].include?(s) ? super : to_s.send(s,*args,&blk)
   end
-  
+
 end

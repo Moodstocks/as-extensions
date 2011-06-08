@@ -18,11 +18,12 @@
 #++
 
 Enumerable.class_eval do
-  
+
   # When a method doesn't exist, convert to an Array
-  def method_missing(method_sym, *arguments, &block)
-    if !is_a?(Array) && respond_to?(:to_a) then to_a.send(method_sym, *arguments, &block)
-    else super end
+  def method_missing(s,*args,&blk)
+    if [:to_str,:to_int].include?(s) || is_a?(Array) || !respond_to?(:to_a)
+      super
+    else to_a.send(s,*args,&blk) end
   end
-  
+
 end

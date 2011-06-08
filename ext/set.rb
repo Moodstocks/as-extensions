@@ -18,10 +18,10 @@
 #++
 
 Set.class_eval do
-  
+
   # If method doesn't exist, consider as an Array.
-  def method_missing(s, *args, &blk)
-    self.to_a.send(s, *args, &blk)
+  def method_missing(s,*args,&blk)
+    [:to_str,:to_int].include?(s) ? super : to_a.send(s,*args,&blk)
   end
-  
+
 end

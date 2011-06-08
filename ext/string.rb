@@ -60,8 +60,8 @@ String.class_eval do
   
   # Consider the String as an Array of chars for a few methods
   if (RUBY_VERSION < "1.9")
-    def method_missing(n,*a,&b)
-      if ASE_ARRAY_METHODS.include?(n) then chars.to_a.send(n,*a,&b).join else super end
+    def method_missing(s,*args,&blk)
+      ASE_ARRAY_METHODS.include?(n) ? chars.to_a.send(s,*args,&blk).join : super
     end
   else
     ASE_ARRAY_METHODS.each{|n| define_method(n){|*a,&b| chars.to_a.send(n,*a,&b).join}}
