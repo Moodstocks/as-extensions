@@ -13,14 +13,16 @@ Read the RDoc if you use them.
 
 ## How To Install
 
-1. Install Jeweler (http://github.com/technicalpickles/jeweler).
-2. Clone the Git repository
-3. Run:
+1) Install Jeweler (http://github.com/technicalpickles/jeweler).
+
+2) Clone the Git repository
+
+3) Run:
 
     rake build
     gem install pkg/*.gem
 
-4. Add "require 'as-extensions'" to your code.
+4) Add `require 'as-extensions'` to your code.
 
 ## Copyright
 
