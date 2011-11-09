@@ -18,27 +18,27 @@
 #++
 
 Array.class_eval do
-  
+
   # Boolean AND of elements
   def band
     inject{ |s,x| s && x }
   end
-  
+
   # For compatibility purpose.
   def bmap(&blk)
     map(&blk).band
   end
-  
+
   # Boolean OR of elements
   def bor
     inject{ |s,x| s || x }
   end
-  
+
   # Call ASE::deepcompact(self)
   def deepcompact
     ASE::deepcompact(self)
   end
-  
+
   def first=(x)
     raise IndexError, 'empty array' if empty?
     self[0] = x
@@ -62,60 +62,61 @@ Array.class_eval do
 
   alias :head :first
   alias :head= :first=
-  
+
   def init
     self[0..-2]
   end
-  
+
   def last=(x)
     raise IndexError, 'empty array' if empty?
     self[-1] = x
   end
-  
+
   # Map a function (ie. Method object) to members
   def map_f(f, *args)
     self.map{ |x| f.call(self, *args) }
   end
-  
+
   # Map a method of members to themselves
   def map_m(sym, *args)
     self.map{ |x| x.send(sym.to_sym, *args) }
   end
-  
+
   # In-place version of map_m
   def map_m!(sym, *args)
     self.map!{ |x| x.send(sym.to_sym, *args) }
   end
-  
+
   # Reverse map_m: members are arguments
   def map_mr(sym, obj, *args)
     self.map{ |x| obj.send(sym.to_sym, x, *args) }
   end
-  
+
   # In-place version of map_mr
   def map_mr!(sym, obj, *args)
     self.map!{ |x| obj.send(sym.to_sym, x, *args) }
   end
-  
+
   # Return a random element.
   def pick(secure=false)
-    self[secure ? ActiveSupport::SecureRandom.random_number(size) : Kernel.rand(size)]
+    @secure_random ||= (RUBY_VERSION < "1.9") ? ActiveSupport::SecureRandom : SecureRandom
+    self[secure ? @secure_random.random_number(size) : Kernel.rand(size)]
   end
-  
+
   def tail
     self[1..-1] || []
   end
-  
+
   # See vsum for an example of what this does
   # Another example: vapply(:to_a) transposes a matrix!
   def vapply(x)
     (head||[]).zip(*tail).map_m(x)
   end
-  
+
   # Vector sum
   # For instance: [[1,2],[1,3]].vsum => [2,5]
   def vsum
     vapply(:sum)
   end
-  
+
 end
