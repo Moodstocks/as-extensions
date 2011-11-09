@@ -17,6 +17,7 @@ begin
     gemspec.add_dependency 'i18n'
     gemspec.add_dependency 'map'
   end
+  Jeweler::RubygemsDotOrgTasks.new
 rescue LoadError
   puts "Jeweler is not available, please install it first."
 end
