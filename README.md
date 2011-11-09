@@ -13,16 +13,10 @@ Read the RDoc if you use them.
 
 ## How To Install
 
-1) Install Jeweler (http://github.com/technicalpickles/jeweler).
+ASE is now on RubyGems, so:
 
-2) Clone the Git repository
-
-3) Run:
-
-    rake build
-    gem install pkg/*.gem
-
-4) Add `require 'as-extensions'` to your code.
+1. `gem install as-extensions`
+2. Add `require 'as-extensions'` to your code.
 
 ## Copyright
 
