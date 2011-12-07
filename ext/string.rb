@@ -18,65 +18,91 @@
 #++
 
 String.class_eval do
-  
-  ASE_ARRAY_METHODS = %w{first first= head head= init last last= tail}.map_m(:to_sym)
-  
+
   class << self
-    
-    attr_accessor :ase_array_methods
-    
+
     # Load a string from a file or a URL.
     def from(file_or_url)
       ASE::String::from(file_or_url)
     end
-    
+
     # Return an alphanumeric string.
     def rand_alphanum(n=1, secure=false)
       @ase_alphanum ||= [('a'..'z'), ('A'..'Z'), ('0'..'9')].map{ |x| x.to_a }.flatten
       Array.new(n){ @ase_alphanum.pick(secure) }.join
     end
-    
+
     # Return an hexadecimal string.
     def rand_hex(n=1, secure=false)
       @ase_hex ||= "0123456789abcdef".chars
       Array.new(n){ @ase_hex.pick(secure) }.join
     end
-    
+
   end # class << self
-  
+
   alias :camelcase_noase :camelcase
   # Same as camelcase from ActiveSupport
   # but dashes are considered as underscores.
   def camelcase
     underscore.camelcase_noase
   end
-  
+
   alias :dasherize_noase :dasherize
   # Same as underscore from ActiveSupport
   # with dashes instead of underscores.
   def dasherize
     underscore.dasherize_noase
   end
-  
+
   # Consider the String as an Array of chars for a few methods
-  if (RUBY_VERSION < "1.9")
-    def method_missing(s,*args,&blk)
-      ASE_ARRAY_METHODS.include?(n) ? chars.to_a.send(s,*args,&blk).join : super
-    end
-  else
-    ASE_ARRAY_METHODS.each{|n| define_method(n){|*a,&b| chars.to_a.send(n,*a,&b).join}}
+
+  def first
+    self[0]
   end
-  
+
+  def first=(x)
+    raise IndexError, 'empty string' if empty?
+    self[0] = x
+  end
+
+  alias :head :first
+  alias :head= :first=
+
+  def init
+    self[0..-2]
+  end
+
+  def init=(x)
+    self[0..-2] = x
+  end
+
+  def last
+    self[-1]
+  end
+
+  def last=(x)
+    raise IndexError, 'empty string' if empty?
+    self[-1] = x
+  end
+
+  def tail
+    self[1..-1]
+  end
+
+  def tail=(x)
+    self[1..-1] = x
+  end
+
   # Helper to convert a raw string to a sane identifier with dashes and ASCII letters.
   # Interpolation is here to force String type, to_s won't always work.
   def sanitize_dashes
     "#{self.to_slug.approximate_ascii.to_ascii.normalize.to_s}"
   end
-  
+
   # Sometimes calling puts as a method can be useful
   def puts
     Kernel::puts self
   end
   alias :p :puts
-  
+
 end

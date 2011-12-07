@@ -11,6 +11,8 @@ Using this gem will make some classes behave differently than what you
 are used to. The Time and DateTime classes are especially concerned.
 Read the RDoc if you use them.
 
+Also, tests are desperately needed...
+
 ## How To Install
 
 ASE is now on RubyGems, so:
