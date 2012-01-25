@@ -64,6 +64,8 @@ module ASE
 
 end
 
+"x".to_json # define String#as_json, cf. https://gist.github.com/1677748
+
 unless ActiveSupport::const_defined?("Extension")
   ActiveSupport::const_set("Extension",ASE)
 end
