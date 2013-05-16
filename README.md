@@ -1,24 +1,17 @@
 # ASE (as-extensions)
 
-## Purpose
+## WARNING
 
-This gem is built on top of ActiveSupport. It provides useful core
-extensions, methods and modules.
+This gem is officially unmaintained, deprecated and hated by its original
+author.
 
-## Warning
+It provides core extensions, methods and modules on top of ActiveSupport.
+Using it makes some classes behave differently than what you are used to.
+The Time and DateTime classes are especially concerned.
 
-Using this gem will make some classes behave differently than what you
-are used to. The Time and DateTime classes are especially concerned.
-Read the RDoc if you use them.
-
-Also, tests are desperately needed...
-
-## How To Install
-
-ASE is now on RubyGems, so:
-
-1. `gem install as-extensions`
-2. Add `require 'as-extensions'` to your code.
+It was all a very bad idea. If you are using it in your code,
+you should migrate away from it (and, IMHO, from ActiveSupport altogether).
+If you need help doing this, please get in touch (with @catwell).
 
 ## Copyright
 
